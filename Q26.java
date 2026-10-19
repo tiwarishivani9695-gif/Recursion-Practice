@@ -1,0 +1,30 @@
+import java.util.Scanner;
+
+public class Q26 {
+    static int binarySearchFirst(int[] arr, int target, int low, int high) {
+        if (low > high) {
+            return -1;
+        }
+        int mid = low + (high - low) / 2;
+        if (arr[mid] == target) {
+            int earlier = binarySearchFirst(arr, target, low, mid - 1);
+            return earlier == -1 ? mid : earlier;
+        }
+        if (arr[mid] < target) {
+            return binarySearchFirst(arr, target, mid + 1, high);
+        }
+        return binarySearchFirst(arr, target, low, mid - 1);
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int x = sc.nextInt();
+        int[] arr = new int[n];
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextInt();
+        }
+        System.out.println(binarySearchFirst(arr, x, 0, n - 1));
+        sc.close();
+    }
+}
